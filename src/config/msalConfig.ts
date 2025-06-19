@@ -1,9 +1,42 @@
 import { Configuration, PopupRequest } from '@azure/msal-browser';
 
+// For Azure Static Web Apps, environment variables are available without VITE_ prefix
+// during build time, but we need to handle both local development and production
+const getClientId = () => {
+  // Try VITE_ prefixed version first (for local development)
+  if (import.meta.env.VITE_AZURE_CLIENT_ID) {
+    return import.meta.env.VITE_AZURE_CLIENT_ID;
+  }
+  
+  // For Azure Static Web Apps, try without prefix
+  if (import.meta.env.AZURE_CLIENT_ID) {
+    return import.meta.env.AZURE_CLIENT_ID;
+  }
+  
+  // Fallback - this should not happen in production
+  console.error('Azure Client ID not found in environment variables');
+  return '';
+};
+
+const getTenantId = () => {
+  // Try VITE_ prefixed version first (for local development)
+  if (import.meta.env.VITE_AZURE_TENANT_ID) {
+    return import.meta.env.VITE_AZURE_TENANT_ID;
+  }
+  
+  // For Azure Static Web Apps, try without prefix
+  if (import.meta.env.AZURE_TENANT_ID) {
+    return import.meta.env.AZURE_TENANT_ID;
+  }
+  
+  // Default to common for multi-tenant
+  return 'common';
+};
+
 export const msalConfig: Configuration = {
   auth: {
-    clientId: import.meta.env.VITE_AZURE_CLIENT_ID || '',
-    authority: `https://login.microsoftonline.com/${import.meta.env.VITE_AZURE_TENANT_ID || 'common'}`,
+    clientId: getClientId(),
+    authority: `https://login.microsoftonline.com/${getTenantId()}`,
     redirectUri: window.location.origin,
   },
   cache: {
