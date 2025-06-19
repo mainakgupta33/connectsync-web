@@ -1,7 +1,7 @@
 {
   "navigationFallback": {
     "rewrite": "/index.html",
-    "exclude": ["/assets/*", "/*.css", "/*.js", "/*.svg", "/favicon.ico", "/manifest.json"]
+    "exclude": ["/images/*", "/api/*"]
   },
   "routes": [
     {
@@ -9,8 +9,10 @@
       "allowedRoles": ["authenticated"]
     },
     {
-      "route": "/*",
-      "rewrite": "/index.html"
+      "route": "/assets/*",
+      "headers": {
+        "Cache-Control": "max-age=31536000"
+      }
     }
   ],
   "auth": {
@@ -29,6 +31,13 @@
     "Cache-Control": "no-cache, no-store, must-revalidate"
   },
   "mimeTypes": {
-    ".json": "application/json"
+    ".json": "application/json",
+    ".js": "application/javascript",
+    ".css": "text/css",
+    ".woff": "font/woff",
+    ".woff2": "font/woff2",
+    ".ttf": "font/ttf",
+    ".eot": "application/vnd.ms-fontobject",
+    ".svg": "image/svg+xml"
   }
 }
