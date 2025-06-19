@@ -1,0 +1,41 @@
+# Node modules
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+pnpm-error.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE and Editor files
+.vscode/        # VS Code
+.idea/          # WebStorm/IntelliJ
+*.iml           # IntelliJ IDEA module files
+.DS_Store       # macOS specific files
+Thumbs.db       # Windows specific files
+
+# npm/yarn/pnpm cache and lock files
+package-lock.json   # You have this, typically committed, but if you prefer not to, uncomment this.
+pnpm-lock.yaml      # If using pnpm
+yarn.lock           # If using yarn
+
+# Vite specific
+.vite/
+coverage/           # If you run tests with coverage
+
+# ESLint cache
+.eslintcache
