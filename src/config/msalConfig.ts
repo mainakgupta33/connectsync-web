@@ -4,7 +4,12 @@ import { Configuration, PopupRequest } from '@azure/msal-browser';
 // during build time, but we need to handle both local development and production
 const getClientId = () => {
   // Try VITE_ prefixed version first (for local development)
+  console.log("Hey");
+  console.log('client Id : ',import.meta.env.VITE_AZURE_CLIENT_ID);
+  console.log('client Id : ',import.meta.env.AZURE_CLIENT_ID);
+
   if (import.meta.env.VITE_AZURE_CLIENT_ID) {
+    console.log('client Id : ',import.meta.env.VITE_AZURE_CLIENT_ID);
     return import.meta.env.VITE_AZURE_CLIENT_ID;
   }
   
