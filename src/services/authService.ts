@@ -41,11 +41,15 @@ interface ClientPrincipal {
     }
   
     getLoginUrl(): string {
-      return '/.auth/login/aad';
+      // Add post_login_redirect_uri to redirect back to the app after login
+      const redirectUri = encodeURIComponent(window.location.origin);
+      return `/.auth/login/aad?post_login_redirect_uri=${redirectUri}`;
     }
   
     getLogoutUrl(): string {
-      return '/.auth/logout';
+      // Add post_logout_redirect_uri to redirect back to the app after logout
+      const redirectUri = encodeURIComponent(window.location.origin);
+      return `/.auth/logout?post_logout_redirect_uri=${redirectUri}`;
     }
   
     login(): void {

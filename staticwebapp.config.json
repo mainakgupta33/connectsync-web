@@ -9,14 +9,6 @@
       "allowedRoles": ["authenticated"]
     },
     {
-      "route": "/.auth/login/aad",
-      "statusCode": 302
-    },
-    {
-      "route": "/.auth/logout",
-      "statusCode": 302
-    },
-    {
       "route": "/assets/*",
       "headers": {
         "Cache-Control": "max-age=31536000"
@@ -33,7 +25,7 @@
         },
         "login": {
           "loginParameters": [
-            "scope=User.ReadWrite.All Group.ReadWrite.All Mail.Send Sites.ReadWrite.All Directory.ReadWrite.All"
+            "scope=openid profile email User.ReadWrite.All Group.ReadWrite.All Mail.Send Sites.ReadWrite.All Directory.ReadWrite.All"
           ]
         }
       }
