@@ -1,14 +1,12 @@
 import React from 'react';
-import { useMsal } from '@azure/msal-react';
+import { useAuth } from '../../hooks/useAuth';
 import { Bell, LogOut, User } from 'lucide-react';
-import { useStore } from '../../store/useStore';
 
 const Header: React.FC = () => {
-  const { instance } = useMsal();
-  const { user } = useStore();
+  const { user, logout } = useAuth();
 
   const handleLogout = () => {
-    instance.logoutPopup();
+    logout();
   };
 
   return (
@@ -29,8 +27,8 @@ const Header: React.FC = () => {
               <User className="h-4 w-4 text-white" />
             </div>
             <div className="text-sm">
-              <p className="font-medium text-gray-900">{user?.displayName || 'Admin User'}</p>
-              <p className="text-gray-500">{user?.mail || 'admin@company.com'}</p>
+              <p className="font-medium text-gray-900">{user?.userDetails || 'Admin User'}</p>
+              <p className="text-gray-500">{user?.identityProvider || 'Azure AD'}</p>
             </div>
             <button
               onClick={handleLogout}

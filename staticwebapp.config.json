@@ -1,12 +1,20 @@
 {
   "navigationFallback": {
     "rewrite": "/index.html",
-    "exclude": ["/images/*", "/api/*"]
+    "exclude": ["/images/*", "/api/*", "/.auth/*"]
   },
   "routes": [
     {
       "route": "/api/*",
       "allowedRoles": ["authenticated"]
+    },
+    {
+      "route": "/.auth/login/aad",
+      "statusCode": 302
+    },
+    {
+      "route": "/.auth/logout",
+      "statusCode": 302
     },
     {
       "route": "/assets/*",
@@ -16,13 +24,17 @@
     }
   ],
   "auth": {
-    "rolesSource": "/api/GetRoles",
     "identityProviders": {
       "azureActiveDirectory": {
         "registration": {
           "openIdIssuer": "https://login.microsoftonline.com/common/v2.0",
           "clientIdSettingName": "AZURE_CLIENT_ID",
           "clientSecretSettingName": "AZURE_CLIENT_SECRET"
+        },
+        "login": {
+          "loginParameters": [
+            "scope=User.ReadWrite.All Group.ReadWrite.All Mail.Send Sites.ReadWrite.All Directory.ReadWrite.All"
+          ]
         }
       }
     }

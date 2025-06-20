@@ -1,20 +1,12 @@
 import React from 'react';
-import { useMsal } from '@azure/msal-react';
-import { loginRequest } from '../config/msalConfig';
+import { useAuth } from '../hooks/useAuth';
 import { Users, Shield, Zap, Globe } from 'lucide-react';
-import toast from 'react-hot-toast';
 
 const Login: React.FC = () => {
-  const { instance } = useMsal();
+  const { login } = useAuth();
 
-  const handleLogin = async () => {
-    try {
-      await instance.loginPopup(loginRequest);
-      toast.success('Successfully signed in!');
-    } catch (error) {
-      console.error('Login failed:', error);
-      toast.error('Sign in failed. Please try again.');
-    }
+  const handleLogin = () => {
+    login();
   };
 
   return (
